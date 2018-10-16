@@ -19,6 +19,15 @@ namespace Gateway.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(o => { o.Limits.MaxRequestBodySize = null; })
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config
+                        .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                        .AddJsonFile("configuration.json", optional: false, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+                })
                 .UseStartup<Startup>();
     }
 }
