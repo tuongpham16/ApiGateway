@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  admin.api:
+    image: ${DOCKER_REGISTRY}adminapi
+    build:
+      context: .
+      dockerfile: Admin.Api\Dockerfile
+
+  gateway.api:
+    image: ${DOCKER_REGISTRY}gatewayapi
+    build:
+      context: .
+      dockerfile: Gateway.Api\Dockerfile
+
+
+  learner.api:
+    image: ${DOCKER_REGISTRY}learnerapi
+    build:
+      context: .
+      dockerfile: Learner.Api\Dockerfile
+
